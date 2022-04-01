@@ -1,3 +1,4 @@
+from pprint import pprint
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic.list import ListView
@@ -37,6 +38,15 @@ class AddCarrinho(View):
             return redirect(http_referer)
 
         variacao = get_object_or_404(models.Variacao, id=variacao_id)
+        produto = variacao.produto
+        variacao_estoque = variacao.estoque
+
+        if variacao.estoque < 1:
+            messages.error(
+                self.request,
+                'Estoque insuficiente.'
+            )
+            return redirect(http_referer)
 
         if not self.request.session.get('carrinho'):
             self.request.session['carrinho'] = {}
@@ -45,10 +55,41 @@ class AddCarrinho(View):
         carrinho = self.request.session['carrinho']
         
         if variacao_id in carrinho:
-            pass
-        else:
-            pass
+            quantidade_carrinho = carrinho[variacao_id]['quantidade']
+            quantidade_carrinho += 1
 
+            if variacao_estoque < quantidade_carrinho:
+                messages.warning(
+                    self.request,
+                    f'Estoque insuficiente para {quantidade_carrinho}x no produto "{produto.nome}". Adicionamos {variacao_estoque}x no seu carrinho.'
+                )
+                quantidade_carrinho = variacao_estoque
+            carrinho[variacao_id]['quantidade'] = quantidade_carrinho
+            carrinho[variacao_id]['preco_quantitativo'] = variacao.preco * quantidade_carrinho
+            carrinho[variacao_id]['preco_quantitativo_promocional'] = variacao.preco_promocional * quantidade_carrinho
+        else:
+            carrinho[variacao_id] = {
+                'produto_id': produto.id,
+                'produto_nome': produto.nome,
+                'variacao_nome': variacao.nome or '',
+                'variacao_id': variacao_id,
+                'preco_unitario': variacao.preco,
+                'preco_unitario_promocional': variacao.preco_promocional,
+                'preco_quantitativo': variacao.preco,
+                'preco_quantitativo_promocional': variacao.preco_promocional,
+                'quantidade': 1,
+                'slug': produto.slug,
+                'imagem': produto.imagem.name if produto.imagem else ''
+            }
+
+        self.request.session.save()
+
+        messages.success(
+            self.request,
+            f'Produto {produto.nome} {variacao.nome} adicionado ao seu ' f'carrinho {carrinho[variacao_id]["quantidade"]}x'
+        )
+
+        return redirect(http_referer)
         return HttpResponse(f'{variacao.produto} {variacao.nome}')
 
 
@@ -57,7 +98,8 @@ class DeleteCarrinho(View):
 
 
 class Carrinho(View):
-    pass
+    def get(self, *args, **kwargs):
+        return render(self.request, 'produto/carrinho.html')
 
 
 class Finalizar(View):
