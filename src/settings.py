@@ -43,12 +43,16 @@ INSTALLED_APPS = [
     'perfil',
     'produto',
 
+    'crispy_forms',
+
 
 
 
     # Necessário somente no desenvolvimento.
     'debug_toolbar',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
