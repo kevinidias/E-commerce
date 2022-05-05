@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
-{% load omfilter %}
+{% load omfilters %}
 
-{% block titulo %}Resumo da compra |{% endblock%}
+{% block titulo %}Resumo da compra | {% endblock %}
 
 {% block conteudo %}
+
 <div class="row mb-5">
     <div class="col-lg">
         <h2>Resumo da sua compra</h2>
@@ -51,18 +52,21 @@
     </div>
 </div>
 
+
+
 <div class="row mt-3">
     <div class="col">
         <h3>Resumo do carrinho</h3>
         <p class="lead">Os produtos, quantidades e preços que você escolheu.</p>
 
-        {% include 'parciais/_carrinho.html' %} 
+        {% include 'parciais/_carrinho.html' %}
     </div>
+
 </div>
 <div class="row mt-3">
     <div class="col">
-        <h3>Resumo do carrinho</h3>
-        <p class="lead text-center">Total do carrinho: {{ carrinho|cart_totals|formata_preco }} </p>
+        <p class="lead text-center"><span class="font-weight-bold">Total do carrinho:</span>
+            {{ carrinho|cart_totals|formata_preco }}</p>
     </div>
 </div>
 
@@ -73,4 +77,6 @@
         </a>
     </div>
 </div>
+
+
 {% endblock %}
