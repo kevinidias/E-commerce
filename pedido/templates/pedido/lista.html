@@ -18,6 +18,7 @@
                     <th scope="col">Qtd. Itens</th>
                     <th scope="col">Status</th>
                     <th scope="col">Mais detalhes</th>
+                    <th scope="col">Cancelar compra</th>
                 </tr>
 
 
@@ -29,7 +30,12 @@
                     <td>{{ pedido.get_status_display }}</td>
                     <td>
                         <a href="{% url 'pedido:detalhe' pedido.id %}">
-                            Ver <i class="fas fa-search-plus ml-2"></i>
+                            <i class="fas fa-search-plus ml-2"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'pedido:deletar_pedido' pedido.id %}">
+                            <i class="fas fa-trash ml-2"></i>
                         </a>
                     </td>
                 </tr>

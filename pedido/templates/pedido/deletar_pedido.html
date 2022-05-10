@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}{{ pedido }} | {% endblock %}
+
+{% load omfilters %}
+{% load static %}
+
+{% block conteudo %}
+
+
+<form method="POST">{% csrf_token %}
+     
+ 
+ 
+    <p>Deseja cancelar a compra do "{{ object }}"?</p>
+     
+     
+     
+        <input type="submit" value="Confirm">
+</form>
+
+{% endblock %}

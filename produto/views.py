@@ -184,7 +184,7 @@ class ResumoDaCompra(View):
         if not perfil:
             messages.error(
                 self.request,
-                'Usuário sem perfil.'
+                'Usuário sem perfil, favor terminar o cadastro..'
             )
             return redirect('perfil:criar')
 

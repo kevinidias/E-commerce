@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, reverse
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, DeleteView
 from django.views import View
 # from django.http import HttpResponse
 from django.contrib import messages
@@ -138,3 +139,11 @@ class Lista(DispatchLoginRequiredMixin, ListView):
     template_name = 'pedido/lista.html'
     paginate_by = 10
     ordering = ['-id']
+
+
+class DeletarPedido(DispatchLoginRequiredMixin, DeleteView):
+    model = Pedido
+    context_object_name = 'pedidos'
+    template_name = 'pedido/deletar_pedido.html'
+    pk_url_kwarg = 'pk'
+    success_url = reverse_lazy('pedido:lista')

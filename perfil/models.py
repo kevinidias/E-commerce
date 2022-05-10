@@ -13,7 +13,7 @@ class Perfil(models.Model):
     data_nascimento = models.DateField()
     cpf = models.CharField(max_length=11)
     endereco = models.CharField(max_length=50)
-    numero = models.CharField(max_length=5)
+    numero = models.CharField(max_length=5, verbose_name='Número')
     complemento = models.CharField(max_length=30)
     bairro = models.CharField(max_length=30)
     cep = models.CharField(max_length=8)
