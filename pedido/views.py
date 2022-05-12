@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView, DeleteView
 from django.views import View
 # from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 from produto.models import Variacao
 from .models import Pedido, ItemPedido
@@ -141,9 +142,11 @@ class Lista(DispatchLoginRequiredMixin, ListView):
     ordering = ['-id']
 
 
-class DeletarPedido(DispatchLoginRequiredMixin, DeleteView):
+class DeletarPedido(DispatchLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Pedido
     context_object_name = 'pedidos'
     template_name = 'pedido/deletar_pedido.html'
     pk_url_kwarg = 'pk'
     success_url = reverse_lazy('pedido:lista')
+    success_message = "was created successfully"
+    

@@ -170,7 +170,7 @@ class Login(View):
 
         messages.success(
             self.request,
-            'Você fez login no sistema e pode concluir sua compra.'
+            'Você fez login no sistema.'
         )
         return redirect('produto:carrinho')
 
