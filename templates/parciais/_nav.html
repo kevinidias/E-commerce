@@ -48,7 +48,7 @@
 
 
         </ul>
-        {% if user.is_authenticated %}
+        {% if user.is_authenticated and request.path == '/' %}
         <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'produto:busca' %}">
             <input name="termo" value="{{ request.GET.termo }}" class="form-control mr-sm-2" type="search"
                 placeholder="Busca" aria-label="Busca">
