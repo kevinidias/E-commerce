@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="pt-BR">
 
+{% load static %}
+
 <head>
     {% include 'parciais/_head.html' %}
     <title>{% block titulo %}{% endblock %}E-commerce</title>
@@ -17,6 +19,10 @@
     <div style="padding-top: 50px;">
         {% include 'parciais/_footer.html' %}
     </div>    
+
+{% block extra_scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+{% endblock extra_scripts %}
 </body>
 
 </html>

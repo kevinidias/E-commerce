@@ -63,7 +63,12 @@
     </div>
 </div>
 
-<script>
-    $('#id_data_nascimento').mask('99/99/9999',{placeholder:"mm/dd/yyyy"});
-</script>
+
+{% endblock %}
+
+{% block extra_scripts %}
+    {{ block.super }}
+    <script type="text/javascript">
+        $('#id_data_nascimento').mask('99/99/9999',{placeholder:"dd/mm/yyyy"});
+    </script>
 {% endblock %}
