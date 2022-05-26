@@ -11,7 +11,7 @@ class Perfil(models.Model):
                                    verbose_name='Usuário')
     idade = models.PositiveIntegerField()
     data_nascimento = models.DateField()
-    cpf = models.CharField(max_length=11)
+    cpf = models.CharField(max_length=14)
     endereco = models.CharField(max_length=50)
     numero = models.CharField(max_length=5, verbose_name='Número')
     complemento = models.CharField(max_length=30)
@@ -68,8 +68,8 @@ class Perfil(models.Model):
             if cpf_salvo is not None and self.pk != perfil.pk:
                 error_messages['cpf'] = 'CPF já existe.'
 
-        if not valida_cpf(self.cpf):
-            error_messages['cpf'] = 'Digite um CPF válido'
+        #if not valida_cpf(self.cpf):
+            #error_messages['cpf'] = 'Digite um CPF válido'
 
         if len(self.cep) < 9:
             error_messages['cep'] = 'CEP inválido, digite os 8 digitos do CEP.'

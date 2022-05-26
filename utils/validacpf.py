@@ -4,7 +4,7 @@ def valida_cpf(cpf):
     cpf = str(cpf)
     cpf = re.sub(r'[^0-9]', '', cpf)
 
-    if not cpf or len(cpf) != 11:
+    if not cpf or len(cpf) != 14:
         return False
 
     novo_cpf = cpf[:-2]                 # Elimina os dois últimos digitos do CPF
