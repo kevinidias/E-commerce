@@ -27,12 +27,18 @@
             </td>
             <td>{{ linha.variacao_nome }}</td>
             <td>
+                <a class="ml-3" href="#">
+                    <i class="fas fa-minus text-danger" aria-hidden="true"></i>
+                </a>
                 {{ linha.quantidade }} x
                 {% if linha.preco_unitario_promocional %}
                 {{ linha.preco_unitario_promocional }}
                 {% else %}
                 {{ linha.preco_unitario }}
                 {% endif %}
+                <a class="ml-3" href="#">
+                    <i class="fas fa-plus text-success" aria-hidden="true"></i>
+                </a>
             </td>
 
             {% if linha.preco_quantitativo_promocional %}
