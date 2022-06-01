@@ -27,7 +27,7 @@
             </td>
             <td>{{ linha.variacao_nome }}</td>
             <td>
-                <a class="ml-3" href="#">
+                <a class="ml-3" href="{% url 'produto:revemoqtditemcarrinho' %}?vid={{ linha.variacao_id }}">
                     <i class="fas fa-minus text-danger" aria-hidden="true"></i>
                 </a>
                 {{ linha.quantidade }} x
@@ -36,7 +36,7 @@
                 {% else %}
                 {{ linha.preco_unitario }}
                 {% endif %}
-                <a class="ml-3" href="#">
+                <a class="ml-3" href="{% url 'produto:adicionaraocarrinho' %}?vid={{ linha.variacao_id }}">
                     <i class="fas fa-plus text-success" aria-hidden="true"></i>
                 </a>
             </td>
